@@ -6,7 +6,7 @@ import { renderLineToAst, splitLineAtAnnotationBoundaries } from '../src/interna
 import { codeLineClass } from '../src/common/style-settings'
 import { AnnotationBaseOptions, AnnotationRenderOptions, ExpressiveCodeAnnotation } from '../src/common/annotation'
 import { ExpressiveCodeBlock } from '../src/common/block'
-import { ResolvedExpressiveCodeEngineConfig } from '../src/common/engine'
+import { ResolvedExpressiveCodeEngineConfig } from '../src/common/engine-core'
 import { ClassNameAnnotation, WrapperAnnotation, annotateMatchingTextParts, classNameAnnotation, getAnnotatedTextParts, nonArrayValues, nonObjectValues } from './utils'
 
 describe('splitLineAtAnnotationBoundaries()', () => {

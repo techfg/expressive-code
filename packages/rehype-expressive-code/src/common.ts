@@ -1,6 +1,6 @@
 import type { VFileWithOutput } from 'unified'
 import type { VFile } from 'vfile'
-import { ExpressiveCodeTheme, ExpressiveCodeBlock, ExpressiveCodeCore, ExpressiveCodeEngine } from 'expressive-code/core'
+import { ExpressiveCodeTheme, ExpressiveCodeBlock, type ExpressiveCodeCore, type ExpressiveCodeEngineCore } from 'expressive-code/core'
 import type { ExpressiveCodeBlockOptions, ExpressiveCodeCoreConfig } from 'expressive-code/core'
 import type { Root, Parents, Element } from 'expressive-code/hast'
 import { visit } from 'expressive-code/hast'
@@ -13,10 +13,10 @@ export type RequireDefined<T, K extends keyof T> = T & { [P in K]-?: NonNullable
 export type AnyVFile = VFile | VFileWithOutput<null>
 
 export type CreateRendererDefaultOptions<E extends ExpressiveCodeCore, T extends string = never> = {
-	ctor: new (...args: ConstructorParameters<typeof ExpressiveCodeEngine>) => E
+	ctor: new (...args: ConstructorParameters<typeof ExpressiveCodeEngineCore>) => E
 } & ([T] extends [never] ? object : { loadTheme: LoadTheme<T> }) // loadTheme must be provided when T extends string
 
-export async function createRendererCommon<E extends ExpressiveCodeEngine, T extends string = never>(
+export async function createRendererCommon<E extends ExpressiveCodeEngineCore, T extends string = never>(
 	options: RehypeExpressiveCodeCommonOptions<ExpressiveCodeCoreConfig, E, T>,
 	defaultOptions: CreateRendererDefaultOptions<E, T>
 ): Promise<RehypeExpressiveCodeEngineRenderer<E>> {
@@ -60,11 +60,11 @@ export async function createRendererCommon<E extends ExpressiveCodeEngine, T ext
 	}
 }
 
-export type RehypeExpressiveCodeCommonDefaultOptions<T extends string, E extends ExpressiveCodeEngine> = {
+export type RehypeExpressiveCodeCommonDefaultOptions<T extends string, E extends ExpressiveCodeEngineCore> = {
 	createRenderer: RequireDefined<RehypeExpressiveCodeCommonOptions<ExpressiveCodeCoreConfig, E, T>, 'customCreateRenderer'>['customCreateRenderer']
 }
 
-export function rehypeExpressiveCodeCommon<T extends string, E extends ExpressiveCodeEngine>(
+export function rehypeExpressiveCodeCommon<T extends string, E extends ExpressiveCodeEngineCore>(
 	options: RehypeExpressiveCodeCommonOptions<ExpressiveCodeCoreConfig, E, T>,
 	defaultOptions: RehypeExpressiveCodeCommonDefaultOptions<T, E>
 ) {

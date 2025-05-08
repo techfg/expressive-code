@@ -24,7 +24,7 @@
     },
     "./core": {
       "types": "./dist/core.d.ts",
-      "default": "./dist/core.js"      
+      "default": "./dist/core.js"
     }
   },
   "types": "./dist/index.d.ts",

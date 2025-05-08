@@ -4,7 +4,7 @@ import { GroupContents, RenderedGroupContents } from '../internal/render-group'
 import { ExpressiveCodeBlock } from './block'
 import { ExpressiveCodeLine } from './line'
 import { ExpressiveCodePlugin, ResolverContext } from './plugin'
-import { ResolvedExpressiveCodeEngineConfig } from './engine'
+import { ResolvedExpressiveCodeEngineConfig } from './engine-core'
 import { GutterElement } from './gutter'
 import { logErrorDetails } from './logger'
 

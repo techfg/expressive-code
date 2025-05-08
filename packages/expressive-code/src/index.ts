@@ -1,4 +1,4 @@
-import type { ExpressiveCodePlugin } from '@expressive-code/core'
+import { type ExpressiveCodePlugin, type ExpressiveCodeTheme, defaultThemes } from '@expressive-code/core'
 import { type ExpressiveCodeCoreConfig, ExpressiveCodeCore } from './core'
 import type { PluginFramesOptions } from '@expressive-code/plugin-frames'
 import { pluginFrames } from '@expressive-code/plugin-frames'
@@ -70,9 +70,15 @@ export class ExpressiveCode extends ExpressiveCodeCore {
 			}
 			pluginsToPrepend.push(pluginFrames(frames !== true ? frames : undefined))
 		}
+		// Transfer deprecated `theme` option to `themes` without triggering the deprecation warning
+		const deprecatedConfig: Omit<ExpressiveCodeConfig, 'theme'> & { theme?: ExpressiveCodeTheme | undefined } = baseConfig
+		if (deprecatedConfig.theme && !baseConfig.themes) {
+			baseConfig.themes = Array.isArray(deprecatedConfig.theme) ? deprecatedConfig.theme : [deprecatedConfig.theme]
+		}
+		const themes = Array.isArray(baseConfig.themes) ? baseConfig.themes : baseConfig.themes ? [baseConfig.themes] : defaultThemes
 		// Create a new plugins array with the default plugins prepended
 		const pluginsWithDefaults = [...pluginsToPrepend, ...(baseConfig.plugins || [])]
 		// Call the base constructor with the new plugins array
-		super({ ...baseConfig, plugins: pluginsWithDefaults })
+		super({ ...baseConfig, plugins: pluginsWithDefaults, themes })
 	}
 }

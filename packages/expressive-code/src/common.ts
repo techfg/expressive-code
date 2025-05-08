@@ -1,5 +1,5 @@
-import { type ExpressiveCodeEngineConfig, ExpressiveCodeEngine } from '@expressive-code/core'
+import { type ExpressiveCodeEngineConfig, ExpressiveCodeEngineCore } from '@expressive-code/core/core'
 
 export interface ExpressiveCodeCoreConfig extends ExpressiveCodeEngineConfig {}
 
-export class ExpressiveCodeCore extends ExpressiveCodeEngine {}
+export class ExpressiveCodeCore extends ExpressiveCodeEngineCore {}

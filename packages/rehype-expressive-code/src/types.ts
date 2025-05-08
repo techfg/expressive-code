@@ -2,7 +2,7 @@ import type {
 	ExpressiveCodeBlock,
 	ExpressiveCodeBlockOptions,
 	ExpressiveCodeCoreConfig,
-	ExpressiveCodeEngine,
+	ExpressiveCodeEngineCore,
 	ExpressiveCodeTheme,
 	ExpressiveCodeThemeInput,
 } from 'expressive-code/core'
@@ -50,7 +50,7 @@ export type RehypeExpressiveCodeDocument = {
 	data: Record<string, unknown> | undefined
 }
 
-export type RehypeExpressiveCodeCommonOptions<C extends ExpressiveCodeCoreConfig, R extends ExpressiveCodeEngine, T extends string = never> = Omit<C, 'themes'> & {
+export type RehypeExpressiveCodeCommonOptions<C extends ExpressiveCodeCoreConfig, R extends ExpressiveCodeEngineCore, T extends string = never> = Omit<C, 'themes'> & {
 	/**
 	 * The color themes that should be available for your code blocks.
 	 *
@@ -69,7 +69,7 @@ export type RehypeExpressiveCodeCommonOptions<C extends ExpressiveCodeCoreConfig
 	 *
 	 * Defaults:
 	 *   - {@link RehypeExpressiveCodeOptions}  `['github-dark', 'github-light']`, two themes bundled with Shiki.
-	 *   - {@link RehypeExpressiveCodeCoreOptions} `[]`
+	 *   - {@link RehypeExpressiveCodeCoreOptions} `[]`, you must provide at least one theme.
 	 */
 	themes?: ThemeType<T> | undefined
 	/**
@@ -132,7 +132,7 @@ export type RehypeExpressiveCodeCommonOptions<C extends ExpressiveCodeCoreConfig
 				customLoadTheme?: LoadTheme<T> | undefined // only support customLoadTheme when T extends string
 		  })
 
-export type RehypeExpressiveCodeEngineRenderer<T extends ExpressiveCodeEngine> = {
+export type RehypeExpressiveCodeEngineRenderer<T extends ExpressiveCodeEngineCore> = {
 	ec: T
 	baseStyles: string
 	themeStyles: string
